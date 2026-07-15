@@ -4,22 +4,7 @@
     "dockerfile": "Dockerfile",
     "context": "."
   },
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {
-      "version": "latest",
-      "moby": true
-    },
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
-    },
-    "ghcr.io/devcontainers/features/go:1": {
-      "version": "1.20"
-    }
-  },
-  "containerEnv": {
-    "KUBECONFIG": "/home/vscode/.kube/config",
-    "MONGODB_SHELL": "/usr/local/bin/mongosh"
-  },
+  "privileged": true,
   "forwardPorts": [
     31500,
     32000,
@@ -58,6 +43,5 @@
       ]
     }
   },
-  "postCreateCommand": "bash .devcontainer/setup.sh",
   "remoteUser": "vscode"
 }
