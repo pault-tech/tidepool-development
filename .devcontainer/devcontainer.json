@@ -5,6 +5,12 @@
     "context": "."
   },
   "privileged": true,
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+              "version": "latest",
+              "moby": true
+            }
+  },
   "forwardPorts": [
     31500,
     32000,
