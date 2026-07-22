@@ -188,7 +188,8 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Set environment variables for the system
 ENV KUBECONFIG=/home/vscode/.kube/config
-ENV MONGODB_SHELL=/usr/local/bin/mongosh
+# ENV MONGODB_SHELL=/usr/local/bin/mongosh
+ENV MONGODB_SHELL=/usr/bin/mongosh
 ENV PATH="/usr/local/go/bin:/home/vscode/go/bin:${PATH}"
 
 USER vscode
