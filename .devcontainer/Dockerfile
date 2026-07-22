@@ -75,7 +75,10 @@ RUN ARCH=$(uname -m) && \
 
 # Install Docker CE
 RUN curl -fsSL https://get.docker.com | sh \
-    && usermod -aG docker vscode
+    && usermod -aG docker vscode \
+    && echo "vscode ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vscode \
+    && chmod 0440 /etc/sudoers.d/vscode
+
 
 # Install Node.js 18
 RUN mkdir -p /etc/apt/keyrings \
