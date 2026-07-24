@@ -18,13 +18,17 @@ def main():
 ### Main End ###
 
 def provisionstrimzi():
-  # Deploy and watch the helm charts
-  helm_remote('strimzi-kafka-operator',
-	repo_name='strimzi',
-	repo_url='https://strimzi.io/charts/',
-	namespace='default',
-	set=['resources.limits.memory=1024Mi', 'resources.requests.memory=Mi']
-  )
+# # Deploy and watch the helm charts
+# helm_remote('strimzi-kafka-operator',
+# repo_name='strimzi',
+# repo_url='https://strimzi.io/charts/',
+# namespace='default',
+# set=['resources.limits.memory=1024Mi', 'resources.requests.memory=Mi']
+#  )
+  # Deploy helm chart synchronously and wait for CRDs to be registered in K8s API server
+  local('helm repo add strimzi https://strimzi.io/charts/ && helm repo update')
+  local('helm upgrade --install strimzi-kafka-operator strimzi/strimzi-kafka-operator --namespace default --set resources.limits.memory=1024Mi --set "extraEnv[0].name=STRIMZI_KUBERNETES_VERSION" --set "extraEnv[0].value=major=1,minor=21"')
+  local('kubectl wait --for=condition=established crd/kafkas.kafka.strimzi.io --timeout=60s')
 
 def provisionkafka():
   k8s_yaml(
